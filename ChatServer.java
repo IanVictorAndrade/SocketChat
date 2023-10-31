@@ -1,8 +1,9 @@
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class ChatServer {
-        private final int PORT = 4000;
+        public static final int PORT = 4000;
         private ServerSocket serverSocket;
 
 
@@ -20,5 +21,13 @@ public class ChatServer {
         public void start() throws IOException {
             System.out.println("Servidor iniciado na porta " + PORT);
             serverSocket = new ServerSocket(PORT);
+            clientConnectionLoop();
         }
+
+    private void clientConnectionLoop() throws IOException {
+        while (true) {
+            Socket clientSocket = serverSocket.accept();
+            System.out.println("Cliente conectado com IP: " + clientSocket.getRemoteSocketAddress());
+        }
+    }
 }
