@@ -35,6 +35,7 @@ public class ChatClient {
             System.out.print("Digite uma mensagem (ou sair para finalizar): ");
             message = scanner.nextLine();
             clientSocket.sendMessage(message);
+            System.out.printf("Mensagem recebida de outro usuário: %s\n" , clientSocket.getMessage());
         } while (!message.equalsIgnoreCase("sair"));
 
     }
