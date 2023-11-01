@@ -37,6 +37,7 @@ public class ChatClient implements Runnable {
     public void run() {
         String message;
         while ((message = clientSocket.getMessage()) != null) {
+            System.out.println();
             System.out.printf("Mensagem recebida de outro usuário: %s\n",
                     message);
         }
