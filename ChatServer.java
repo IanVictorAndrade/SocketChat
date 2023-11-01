@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -52,9 +53,15 @@ public class ChatServer {
     }
 
     private void sendMessageToAllClients(ClientSocket sender, String message) {
-        for (ClientSocket clientSocket : clients) {
+        Iterator<ClientSocket> iterator = clients.iterator();
+        while (iterator.hasNext()) {
+            ClientSocket clientSocket = iterator.next();
             if (!sender.equals(clientSocket)) {
-                clientSocket.sendMessage(message);
+                if (!clientSocket.sendMessage("cliente " + sender.getRemoteSocketAddress()
+                        + ":"
+                        + message)) {
+                    iterator.remove();
+                }
             }
         }
     }
